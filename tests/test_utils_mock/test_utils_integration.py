@@ -9,7 +9,6 @@ from utils import get_best_most_common_face, init_azure_client, Face
 def init_client():
     """
     Initialize the azure client for each test.
-    :return:
     """
     init_azure_client()
 
@@ -54,6 +53,8 @@ class TestGetBestMostCommonFace:
     def test_single_photo(self, c_open):
         """
         Test the function with a single photo.
+
+        :type c_open: function
         """
         files = c_open("gadot.png")
 
@@ -63,6 +64,8 @@ class TestGetBestMostCommonFace:
     def test_multiple_photos(self, c_open):
         """
         Make sure that the function can handle multiple photos correctly.
+
+        :type c_open: function
         """
         files = c_open("gadot.png", "cage.png", "gadot2.png")
 
@@ -75,6 +78,8 @@ class TestGetBestMostCommonFace:
         Make sure that the function can handle different people correctly.
         The function should select a random person because every appears
         the same.
+
+        :type c_open: function
         """
         files = c_open("gadot.png", "cage.png")
 
@@ -84,6 +89,8 @@ class TestGetBestMostCommonFace:
     def test_no_people(self, c_open):
         """
         Make sure that there are no people in the picture, None is returned.
+
+        :type c_open: function
         """
         files = c_open("mountain.png")
 

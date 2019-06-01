@@ -61,6 +61,9 @@ class TestGetCommonFaceUids:
         """
         Make sure that when there is no common face(all the faces
         are different) then the function returns one of them.
+
+        :type photo1: Photo
+        :type photo2: Photo
         """
         result = get_common_face_uids([photo1, photo2])
         assert result is not None
@@ -68,6 +71,10 @@ class TestGetCommonFaceUids:
     def test_happy_flow(self, generator, photo_multiple_faces, photo2):
         """
         Make sure that the function returns the appropriate most common face.
+
+        :type generator: tests.data_population.Generator
+        :type photo_multiple_faces: Photo
+        :type photo2: Photo
         """
         generator.face(photo=photo2, uid='c')
 
@@ -79,6 +86,9 @@ class TestGetCommonFaceUids:
         """
         Make sure that when there are no faces detected in the pictures that
         the function will returned `None`.
+
+        :type photo1: Photo
+        :type photo2: Photo
         """
         assert get_common_face_uids([photo1, photo2]) == []
 
@@ -120,6 +130,7 @@ class TestGetBestFace:
         """
         Make sure the function works in normal flow. The face which covers
         the most of the photo should be returned.
+
         :type generator: Generator
         """
         face1, face2 = generator.faces('a', 'b')
@@ -142,9 +153,17 @@ class TestGetBestFace:
                              ([], ["a"], [])
                          ]
                          )
-def test_get_faces_by_uids(generator, generated_uids, required_uids, expected_uids):
+def test_get_faces_by_uids(generator, generated_uids, required_uids,
+                           expected_uids):
     """
     Test that the get_faces_by_uids returns the proper Face objects.
+
+    :type generator: tests.data_population.Generator
+    :param list generated_uids: The IDs of the faces that will be generated.
+    :param list required_uids: The IDs that will be required from the
+        _get_faces-by_uids function
+    :param list expected_uids: The UIDs that will be expected to be returned
+        from the function.
     """
     faces = generator.faces(*generated_uids)
     uids = required_uids
@@ -153,4 +172,3 @@ def test_get_faces_by_uids(generator, generated_uids, required_uids, expected_ui
 
     for face in faces:
         assert face.uid in expected_uids
-
